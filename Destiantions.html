@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Curated Destinations | Egypt Heritage</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="Destination.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg fixed-top custom-luxury-nav transition-all">
+    <div class="container-xl px-3 px-lg-5">
+
+      <a class="navbar-brand d-flex align-items-center gap-2" href="./project/index.html">
+        <span class="material-symbols-outlined text-gold fs-3">temple_hindu</span>
+        <div class="d-flex flex-column text-start">
+          <span class="font-headline fw-bold tracking-wider text-white logo-text">EGYPT HERITAGE</span>
+          <span class="label-md text-gold text-uppercase"
+            style="font-size: 8px; letter-spacing: 0.25em; margin-top: -3px;">Bespoke Journeys</span>
+        </div>
+      </a>
+
+      <button class="navbar-toggler border-0 shadow-none text-white p-0" type="button" data-bs-toggle="collapse"
+        data-bs-target="#luxuryNavbar" aria-controls="luxuryNavbar" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="material-symbols-outlined fs-2 text-gold">menu</span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="luxuryNavbar">
+        <ul class="navbar-nav ms-auto me-4 mb-2 mb-lg-0 align-items-lg-center gap-lg-4">
+          <li class="nav-item">
+            <a class="nav-link nav-luxury-link" href="./index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-luxury-link active" href="./Destiantions.html">Destinations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-luxury-link" href="./Tours.html">Curated Tours</a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center">
+          <a href="./tours/index.html"
+            class="btn btn-luxury-gold rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2 label-md text-uppercase">
+            <span>Plan My Trip</span>
+            <i class="bi bi-arrow-right small"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <main class="w-100">
+    <section class="hero-section d-flex align-items-center justify-content-center overflow-hidden pt-5">
+      <div class="position-absolute top-0 start-0 w-100 h-100 hero-bg"
+        style="background-image: url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1600&q=80');">
+      </div>
+      <div class="position-absolute top-0 start-0 w-100 h-100 hero-overlay"></div>
+      <div class="position-relative z-1 container-xl text-center px-3 px-lg-5 mt-5">
+        <span
+          class="label-md text-primary-custom text-uppercase d-flex align-items-center justify-content-center gap-3 mb-4"
+          style="letter-spacing: 0.3em;">
+          <span style="width: 32px; height: 1px; background-color: var(--primary, #775a19);"></span>
+          Explore Egypt
+          <span style="width: 32px; height: 1px; background-color: var(--primary, #775a19);"></span>
+        </span>
+        <h1 class="font-headline display-lg d-none d-md-block text-dark mb-4">Timeless Journeys</h1>
+        <h1 class="font-headline display-lg-mobile d-md-none text-dark mb-4">Timeless Journeys</h1>
+        <p class="fs-5 text-on-surface-variant mx-auto" style="max-width: 720px; line-height: 1.6;">Discover curated
+          experiences spanning the majestic Nile, the ancient ruins of Luxor, and the pristine shores of the Red Sea in
+          unparalleled luxury.</p>
+      </div>
+    </section>
+
+    <section class="py-5 my-3">
+      <div class="container-xl px-3 px-lg-5">
+        <div class="text-center mb-5 mx-auto" style="max-width: 650px;">
+          <h2 class="font-headline headline-lg mb-3">Curated Regions</h2>
+          <p class="fs-5 text-on-surface-variant">Navigate our hand-selected territories, each offering a distinct
+            chapter of Egypt's storied landscape.</p>
+        </div>
+
+        <div class="row g-4" id="regions-grid"></div>
+
+      </div>
+    </section>
+
+    <section class="py-5 bg-white border-top border-bottom">
+      <div class="container-xl px-3 px-lg-5 py-3">
+        <div class="text-center mb-5 mx-auto" style="max-width: 650px;">
+          <span class="label-md text-primary-custom text-uppercase d-block mb-2"
+            style="letter-spacing: 0.2em;">Unrivaled Moments</span>
+          <h2 class="font-headline headline-lg mb-3">Signature Experiences</h2>
+          <p class="text-on-surface-variant fs-6">Every region holds unique, tailored adventures designed for
+            extraordinary memories.</p>
+        </div>
+
+        <div class="row g-4 text-center">
+          <div class="col-12 col-md-4">
+            <div class="p-4 rounded-4 bg-surface-low border h-100 d-flex flex-column align-items-center">
+              <div class="icon-box mb-3 text-primary-custom">
+                <i class="bi bi-water fs-2"></i>
+              </div>
+              <h5 class="font-headline mb-2">Private Dahabiya Nile Cruises</h5>
+              <p class="text-muted small mb-0">Sail between Luxor and Aswan on an exclusive traditional wooden yacht
+                with private chefs.</p>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="p-4 rounded-4 bg-surface-low border h-100 d-flex flex-column align-items-center">
+              <div class="icon-box mb-3 text-primary-custom">
+                <i class="bi bi-bank fs-2"></i>
+              </div>
+              <h5 class="font-headline mb-2">After-Hours Temple Access</h5>
+              <p class="text-muted small mb-0">Enjoy VIP private entry to the Giza Pyramids and Valley of the Kings away
+                from public crowds.</p>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="p-4 rounded-4 bg-surface-low border h-100 d-flex flex-column align-items-center">
+              <div class="icon-box mb-3 text-primary-custom">
+                <i class="bi bi-tsunami fs-2"></i>
+              </div>
+              <h5 class="font-headline mb-2">Red Sea Yacht Charters</h5>
+              <p class="text-muted small mb-0">Explore secluded reefs, private islands, and luxury marine sanctuaries in
+                Hurghada & El Gouna.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5 bg-surface-low position-relative">
+      <div class="container-xl px-3 px-lg-5 py-3">
+        <div class="row g-4 text-center">
+          <div class="col-6 col-md-3">
+            <h3 class="font-headline display-lg-mobile text-primary-custom mb-1">6+</h3>
+            <p class="text-on-surface-variant label-md text-uppercase mb-0">Iconic Regions</p>
+          </div>
+          <div class="col-6 col-md-3">
+            <h3 class="font-headline display-lg-mobile text-primary-custom mb-1">100%</h3>
+            <p class="text-on-surface-variant label-md text-uppercase mb-0">Tailored Journeys</p>
+          </div>
+          <div class="col-6 col-md-3">
+            <h3 class="font-headline display-lg-mobile text-primary-custom mb-1">4.9★</h3>
+            <p class="text-on-surface-variant label-md text-uppercase mb-0">Traveler Rating</p>
+          </div>
+          <div class="col-6 col-md-3">
+            <h3 class="font-headline display-lg-mobile text-primary-custom mb-1">24/7</h3>
+            <p class="text-on-surface-variant label-md text-uppercase mb-0">Private Concierge</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5 bg-white border-top">
+      <div class="container-xl px-3 px-lg-5 py-4">
+        <div class="row align-items-center g-5">
+          <div class="col-12 col-lg-6">
+            <span class="label-md text-primary-custom text-uppercase d-block mb-2" style="letter-spacing: 0.2em;">Travel
+              Wisdom</span>
+            <h2 class="font-headline headline-lg mb-3">When to Visit Egypt</h2>
+            <p class="text-on-surface-variant mb-4" style="line-height: 1.7;">Egypt is a year-round luxury destination,
+              but planning according to the region enhances your journey immensely.</p>
+
+            <div class="d-flex gap-3 mb-3">
+              <div class="text-primary-custom"><i class="bi bi-calendar2-check-fill fs-4"></i></div>
+              <div>
+                <h6 class="font-headline mb-1 fw-bold">October – April (Peak Cultural Season)</h6>
+                <p class="text-muted small mb-0">Ideal climate for exploring Nile temples, Cairo's historic quarters,
+                  and desert expeditions.</p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3">
+              <div class="text-primary-custom"><i class="bi bi-sun-fill fs-4"></i></div>
+              <div>
+                <h6 class="font-headline mb-1 fw-bold">May – September (Red Sea Escapes)</h6>
+                <p class="text-muted small mb-0">Perfect conditions for coastal yachting, deep-sea diving, and relaxing
+                  at coastal luxury resorts.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="rounded-4 overflow-hidden shadow-lg position-relative" style="height: 380px;">
+              <img src="https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1000&q=80"
+                alt="Egypt Sunset" class="w-100 h-100 object-fit-cover">
+              <div class="position-absolute bottom-0 start-0 w-100 p-4 text-white"
+                style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                <span class="badge bg-gold mb-1">Pro Tip</span>
+                <p class="mb-0 small fst-italic">Our private concierge coordinates climate-adjusted daily itineraries to
+                  maximize comfort during your excursions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-4 newsletter-section text-white position-relative">
+      <div class="container-xl px-3 px-lg-5 text-center">
+        <div class="mx-auto py-2" style="max-width: 650px;">
+          <span class="material-symbols-outlined text-warning mb-2" style="font-size: 32px;">flight_takeoff</span>
+          <h3 class="font-headline headline-md mb-2 text-white">The Explorer's Dispatch</h3>
+          <p class="fs-6 text-white-50 mb-3 mx-auto"
+            style="max-width: 540px; line-height: 1.5; font-size: 0.95rem !important;">
+            Receive curated itineraries, seasonal insights, and exclusive early access to our most sought-after journeys
+            directly to your inbox.
+          </p>
+
+          <form class="d-flex flex-column flex-sm-row justify-content-center shadow-sm mb-2 mx-auto"
+            style="max-width: 500px;">
+            <input type="email"
+              class="form-control form-control-custom rounded-start-pill rounded-sm-end-0 py-2 px-3 small"
+              placeholder="Enter your email address" required />
+            <button type="submit"
+              class="btn bg-primary-custom rounded-end-pill rounded-sm-start-0 px-4 py-2 label-md text-uppercase text-nowrap mt-2 mt-sm-0">
+              Subscribe
+            </button>
+          </form>
+
+          <p class="text-white-50 text-uppercase tracking-wide mb-0" style="font-size: 10px; opacity: 0.6;">
+            By subscribing, you agree to our privacy policy. Unsubscribe at any time.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal fade" id="newsletterModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white border-secondary text-center p-4">
+        <div class="modal-body">
+          <span class="material-symbols-outlined text-success display-4 mb-3">check_circle</span>
+          <h4 class="font-headline mb-2">Thank You!</h4>
+          <p class="text-white-50 mb-0">You have successfully subscribed to our Newsletter</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-5 text-white" style="background-color: #132834; border-top: 1px solid rgba(119, 90, 25, 0.2);">
+    <div class="container-xl px-3 px-lg-5 py-4">
+      <div
+        class="row g-4 justify-content-between align-items-center border-bottom border-secondary border-opacity-25 pb-4 mb-4">
+
+        <div class="col-12 col-md-6 text-center text-md-start">
+          <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
+            <span class="material-symbols-outlined text-gold fs-3">temple_hindu</span>
+            <span class="font-headline fw-bold text-white fs-4">EGYPT HERITAGE</span>
+          </div>
+          <p class="text-white-50 small mb-0" style="max-width: 400px;">
+            Private, considered journeys through Egypt — designed one traveler at a time.
+          </p>
+        </div>
+
+        <div class="col-12 col-md-6 text-center text-md-end">
+          <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-4 label-md text-uppercase">
+            <a href="./project/index.html" class="text-white-50 text-decoration-none hover-gold">Home</a>
+            <a href="./index.html" class="text-white-50 text-decoration-none hover-gold">Destinations</a>
+            <a href="./tours/index.html" class="text-white-50 text-decoration-none hover-gold">Tours</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center text-white-50 small">
+        <p class="mb-2 mb-sm-0">© 2026 Egypt Heritage. All rights reserved.</p>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-white-50 text-decoration-none hover-gold">Privacy Policy</a>
+          <span>•</span>
+          <a href="#" class="text-white-50 text-decoration-none hover-gold">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="Destination.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+{
+    "destinations": [
+        {
+            "id": "d1",
+            "name": "Giza",
+            "subtitle": "Land of the Pyramids",
+            "description": "Home to the iconic Great Pyramids and the Sphinx.",
+            "rating": 4.9,
+            "image": "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": "d2",
+            "name": "Cairo",
+            "subtitle": "The Historic Capital",
+            "description": "Explore timeless heritage, vibrant bazaars, and rich culture.",
+            "rating": 4.8,
+            "image": "https://transcode-v2.app.engoo.com/image/fetch/f_auto,c_limit,w_1200,h_630,dpr_1/https://assets.app.engoo.com/images/1c3xVGGDmh4bevsepVMEV3.jpeg"
+        },
+        {
+            "id": "d3",
+            "name": "Luxor",
+            "subtitle": "World's Greatest Open-Air Museum",
+            "description": "Discover ancient temples and the legendary Valley of the Kings.",
+            "rating": 4.9,
+            "image": "https://egyptunitedtours.com/wp-content/uploads/2024/11/Luxor-and-the-Valley-of-the-Kings.jpg"
+        },
+        {
+            "id": "d4",
+            "name": "Aswan",
+            "subtitle": "Jewel of the Nile",
+            "description": "Relax along the tranquil Nile and witness majestic Nubian culture.",
+            "rating": 4.7,
+            "image": "https://blueniletours.com/wp-content/uploads/2025/08/abu-simbel-temples.jpg"
+        },
+        {
+            "id": "d5",
+            "name": "Alexandria",
+            "subtitle": "The Pearl of the Mediterranean",
+            "description": "Coastal charm mixed with Greco-Roman history and famous landmarks.",
+            "rating": 4.6,
+            "image": "https://www.wowabouts.com/z-media/2018/10/Bibliotheca%20Alexandrina%202.jpg"
+        },
+        {
+            "id": "d6",
+            "name": "Red Sea",
+            "subtitle": "Paradise of Marine Life",
+            "description": "World-class diving, vibrant coral reefs, and island adventures.",
+            "rating": 4.9,
+            "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "tours": [
+        {
+            "id": "t1",
+            "destinationId": "d1",
+            "name": "Pyramids & Sphinx Camel Safari",
+            "city": "Giza",
+            "price": 45,
+            "duration": "4 Hours",
+            "image": "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": "t2",
+            "destinationId": "d1",
+            "name": "Quad Biking Desert Adventure",
+            "city": "Giza",
+            "price": 35,
+            "duration": "2 Hours",
+            "image": "https://i0.wp.com/www.aubergedusud.com/wp-content/uploads/2020/11/Quad-biking-tour-in-the-Merzouga-desert.jpg"
+        },
+        {
+            "id": "t3",
+            "destinationId": "d2",
+            "name": "Egyptian Museum & Treasures Walk",
+            "city": "Cairo",
+            "price": 40,
+            "duration": "4 Hours",
+            "image": "https://transcode-v2.app.engoo.com/image/fetch/f_auto,c_limit,w_1200,h_630,dpr_1/https://assets.app.engoo.com/images/1c3xVGGDmh4bevsepVMEV3.jpeg"
+        },
+        {
+            "id": "t4",
+            "destinationId": "d2",
+            "name": "Khan El Khalili Night Market Tour",
+            "city": "Cairo",
+            "price": 25,
+            "duration": "3 Hours",
+            "image": "https://literarytoursegypt.com/wp-content/uploads/2022/08/Khan-El-Khalili-Bazaar-1536x1027.jpg"
+        },
+        {
+            "id": "t5",
+            "destinationId": "d3",
+            "name": "Valley of the Kings Private Tour",
+            "city": "Luxor",
+            "price": 85,
+            "duration": "6 Hours",
+            "image": "https://egyptunitedtours.com/wp-content/uploads/2024/11/Luxor-and-the-Valley-of-the-Kings.jpg"
+        },
+        {
+            "id": "t6",
+            "destinationId": "d3",
+            "name": "Karnak & Luxor Temples Excursion",
+            "city": "Luxor",
+            "price": 60,
+            "duration": "5 Hours",
+            "image": "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_900/w_74,x_13,y_13,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/lwynnieyoul793opu1go/TourofKarnakandLuxorTemplesfromLuxorwithlunch.jpg"
+        },
+        {
+            "id": "t7",
+            "destinationId": "d4",
+            "name": "Abu Simbel Temples Day Trip",
+            "city": "Aswan",
+            "price": 150,
+            "duration": "9 Hours",
+            "image": "https://blueniletours.com/wp-content/uploads/2025/08/abu-simbel-temples.jpg"
+        },
+        {
+            "id": "t8",
+            "destinationId": "d4",
+            "name": "Sunset Nile Felucca & Nubian Village",
+            "city": "Aswan",
+            "price": 35,
+            "duration": "3 Hours",
+            "image": "https://images.pexels.com/photos/35556385/pexels-photo-35556385.jpeg"
+        },
+        {
+            "id": "t9",
+            "destinationId": "d5",
+            "name": "Bibliotheca Alexandrina & Citadel",
+            "city": "Alexandria",
+            "price": 30,
+            "duration": "4 Hours",
+            "image": "https://www.wowabouts.com/z-media/2018/10/Bibliotheca%20Alexandrina%202.jpg"
+        },
+        {
+            "id": "t10",
+            "destinationId": "d5",
+            "name": "Alexandria Seafront & Catacombs Tour",
+            "city": "Alexandria",
+            "price": 40,
+            "duration": "5 Hours",
+            "image": "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/oucbekoofs10l13qpyph/Explore%20Alexandria:%20Citadel%2C%20Catacombs%2C%20Pompey's%20Pillar%2C%20and%20More.jpg"
+        },
+        {
+            "id": "t11",
+            "destinationId": "d6",
+            "name": "Ras Mohammed Diving & Coral Reefs",
+            "city": "Red Sea",
+            "price": 110,
+            "duration": "8 Hours",
+            "image": "https://images.pexels.com/photos/38845963/pexels-photo-38845963.jpeg"
+        },
+        {
+            "id": "t12",
+            "destinationId": "d6",
+            "name": "Giftun Island Snorkeling Boat Trip",
+            "city": "Red Sea",
+            "price": 50,
+            "duration": "6 Hours",
+            "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "users": [],
+    "bookings": []
+}
