@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let emailInput = document.getElementById("email");
     let passwordInput = document.getElementById("pass");
     let confirmPasswordInput = document.getElementById("cpass");
-
     let errorMsg = document.createElement("p");
     errorMsg.id = "errorMsg";
     errorMsg.style.color = "#ff6b6b";
@@ -12,11 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
     errorMsg.style.marginTop = "10px";
     errorMsg.style.textAlign = "center";
     if (signupForm) signupForm.appendChild(errorMsg);
-
     const API_URL = "http://localhost:3000/users";
-
     if (!signupForm) return;
-
     signupForm.addEventListener("submit", async function (e) {
         e.preventDefault();
         errorMsg.textContent = "";
@@ -30,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
             errorMsg.textContent = "Passwords do not match!";
             return;
         }
-
         try {
             let checkResponse = await fetch(API_URL);
             if (checkResponse.ok) {
