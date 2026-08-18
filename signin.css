@@ -1,0 +1,77 @@
+.signin-page {
+    background: linear-gradient(rgba(19, 40, 52, 0.65), rgba(19, 40, 52, 0.85)), 
+                url('https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat fixed;
+    position: relative;
+}
+
+.glass-card {
+    background: rgba(19, 40, 52, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.glass-icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-gold {
+    color: #c5a059 !important;
+}
+
+.glass-input {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: #c5a059 !important;
+    box-shadow: 0 0 10px rgba(197, 160, 89, 0.3) !important;
+    outline: none;
+}
+
+.custom-checkbox {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.custom-checkbox:checked {
+    background-color: #775a19;
+    border-color: #775a19;
+}
+
+.custom-checkbox:focus {
+    box-shadow: none;
+}
+
+.glass-card .btn-luxury-gold {
+    background: linear-gradient(135deg, #c5a059 0%, #775a19 100%) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s ease;
+}
+
+.glass-card .btn-luxury-gold:hover {
+    background: linear-gradient(135deg, #d4af37 0%, #8a6a21 100%) !important;
+    box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4) !important;
+    transform: translateY(-2px);
+}
