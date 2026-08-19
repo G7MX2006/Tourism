@@ -1,8 +1,7 @@
 let loginForm = document.getElementById("loginForm");
 let emailInput = document.getElementById("email");
-let passwordInput = document.getElementById("password");
+let passwordInput = document.getElementById("pass"); 
 let rememberMe = document.getElementById("rem");
-
 
 let errorMsg = document.createElement("p");
 errorMsg.id = "errorMsg";
@@ -14,7 +13,6 @@ errorMsg.style.textAlign = "center";
 loginForm.appendChild(errorMsg);
 
 const API_URL = "http://localhost:3000/users";
-
 
 const savedEmail = localStorage.getItem("rememberedEmail");
 if (savedEmail) {
@@ -40,10 +38,8 @@ async function Login(email, password) {
             return;
         }
 
-        
         localStorage.setItem("currentUser", JSON.stringify(matchedUser));
 
-       
         if (rememberMe && rememberMe.checked) {
             localStorage.setItem("rememberedEmail", email);
         } else {
