@@ -21,11 +21,12 @@
   <nav class="navbar navbar-expand-lg fixed-top custom-luxury-nav transition-all">
     <div class="container-xl px-3 px-lg-5">
 
-      <a class="navbar-brand d-flex align-items-center gap-2" href="./index.html">
+
+      <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="../index.html">
         <span class="material-symbols-outlined text-gold fs-3">temple_hindu</span>
         <div class="d-flex flex-column text-start">
-          <span class="font-headline fw-bold tracking-wider text-white logo-text">EGYPT HERITAGE</span>
-          <span class="label-md text-gold text-uppercase"
+          <span class="font-headline fw-bold tracking-wider text-white logo-text text-nowrap">EGYPT HERITAGE</span>
+          <span class="label-md text-gold text-uppercase text-nowrap"
             style="font-size: 8px; letter-spacing: 0.25em; margin-top: -3px;">Bespoke Journeys</span>
         </div>
       </a>
@@ -35,29 +36,36 @@
         <span class="material-symbols-outlined fs-2 text-gold">menu</span>
       </button>
 
-      <div class="collapse navbar-collapse" id="luxuryNavbar">
-        <ul class="navbar-nav ms-auto me-4 mb-2 mb-lg-0 align-items-lg-center gap-lg-4">
+      <div class="collapse navbar-collapse justify-content-between" id="luxuryNavbar">
+
+        <ul class="navbar-nav mx-auto align-items-lg-center gap-lg-3 gap-xl-4 my-3 my-lg-0 text-center">
           <li class="nav-item">
-            <a class="nav-link nav-luxury-link" href="./index.html">Home</a>
+            <a class="nav-link nav-luxury-link text-nowrap active" href="./index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-luxury-link active" href="./pages/Destiantions.html">Destinations</a>
+            <a class="nav-link nav-luxury-link text-nowrap " href="./pages/Destiantions.html">Destinations</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-luxury-link" href="./pages/Tours.html">Curated Tours</a>
+            <a class="nav-link nav-luxury-link text-nowrap" href="./pages/Tours.html">Curated Tours</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-luxury-link text-nowrap" href="./pages/Booking.html">Plan My Trip</a>
           </li>
         </ul>
-        <div class="d-flex align-items-center">
-          <a href=""
-            class="btn btn-luxury-gold rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2 label-md text-uppercase">
-            <span>Plan My Trip</span>
-            <i class="bi bi-arrow-right small"></i>
-          </a>
+
+
+        <div
+          class="nav-auth-wrapper d-flex align-items-center justify-content-center justify-content-lg-end gap-4 gap-xl-5">
+          <span id="userDisplayName" class="text-gold fw-medium small text-nowrap me-2"></span>
+          <a href="#" id="authBtn"
+            class="btn btn-luxury-gold rounded-pill px-4 py-2 label-md text-uppercase text-nowrap"></a>
         </div>
+
       </div>
 
     </div>
   </nav>
+
 
   <main class="w-100">
     <section class="hero-section-home d-flex align-items-center overflow-hidden pt-5">
