@@ -7,6 +7,42 @@ const sortFilter = document.getElementById("sort-filter");
 const priceVal = document.getElementById("price-val");
 
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const userDisplayName = document.getElementById("userDisplayName");
+  const authBtn = document.getElementById("authBtn");
+
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (currentUser) {
+
+    userDisplayName.textContent = ` ${currentUser.name}`;
+    authBtn.textContent = "Log out";
+    authBtn.href = "#";
+
+
+    authBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem("currentUser");
+      window.location.reload();
+    });
+  } else {
+
+    userDisplayName.textContent = "";
+    authBtn.textContent = "Login";
+   authBtn.href = "./signin.html";
+  }
+});
+
+
+
+
+
+
+
+
+
 async function FetchTours() {
   try {
     const response = await fetch(API_Tour);
@@ -47,8 +83,6 @@ function displayTours(tours) {
 
             <div class="position-relative">
               <img src="${tour.image}" class="card-img-top" alt="${tour.name}" style="height: 160px; object-fit: cover;">
-              
-              <!-- Badge الـ Rating فقط فوق الصورة -->
               <span class="badge bg-white text-dark position-absolute top-0 start-0 m-2 px-2 py-1 fw-bold shadow-sm rounded-pill small d-flex align-items-center gap-1">
                 <i class="bi bi-star-fill text-warning"></i> ${tour.rate || '4.8'}
               </span>
@@ -66,7 +100,7 @@ function displayTours(tours) {
               </div>
 
               <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center">
-                <!-- السعر باللون الذهبي -->
+              
                 <span class="fw-bold text-warning fs-5">$${tour.price}</span>
                 
                 <a href="Booking.html?tourId=${tour.id}" class="btn btn-warning btn-sm px-3 rounded-2 fw-semibold">
