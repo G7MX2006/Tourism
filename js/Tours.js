@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     userDisplayName.textContent = "";
     authBtn.textContent = "Login";
-   authBtn.href = "./signin.html";
+    authBtn.href = "./signin.html";
   }
 });
 
@@ -78,43 +78,44 @@ function displayTours(tours) {
   }
   tours.forEach(tour => {
     cards.innerHTML += `
-        <div class="col-12 col-md-6 col-xl-6 ">
-          <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden tour-card-hover ">
+    <div class="col-12 col-md-6 col-xl-6">
+      <div class="card h-100 border border-secondary border-opacity-10 shadow-sm rounded-4 overflow-hidden tour-card-hover bg-white">
 
-            <div class="position-relative">
-              <img src="${tour.image}" class="card-img-top" alt="${tour.name}" style="height: 160px; object-fit: cover;">
-              <span class="badge bg-white text-dark position-absolute top-0 start-0 m-2 px-2 py-1 fw-bold shadow-sm rounded-pill small d-flex align-items-center gap-1">
-                <i class="bi bi-star-fill text-warning"></i> ${tour.rate || '4.8'}
-              </span>
+        <div class="position-relative">
+          <img src="${tour.image}" class="card-img-top" alt="${tour.name}" style="height: 175px; object-fit: cover;">
+          <span class="badge bg-white text-dark position-absolute top-0 start-0 m-3 px-2 py-1 fw-bold shadow-sm rounded-pill small d-flex align-items-center gap-1">
+            <i class="bi bi-star-fill text-gold"></i> ${tour.rate || '4.8'}
+          </span>
+        </div>
+
+        <div class="card-body d-flex flex-column p-4">
+          <h6 class="card-title fw-bold text-dark mb-2 font-headline fs-6 text-truncate" title="${tour.name}">
+            ${tour.name}
+          </h6>
+
+          <div class="d-flex align-items-center gap-2 text-muted mb-3 small" style="font-size: 13px;">
+            <span><i class="bi bi-geo-alt-fill text-gold me-1"></i>${tour.city}</span>
+            <span>•</span>
+            <span><i class="bi bi-clock-fill text-gold me-1"></i>${tour.duration}</span>
+          </div>
+
+          <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
+            <div>
+              <span class="d-block text-muted" style="font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;">From</span>
+              <span class="fw-bold text-primary-custom font-headline fs-5">$${tour.price}</span>
             </div>
-
-            <div class="card-body d-flex flex-column p-3">
-              <h6 class="card-title fw-bold text-dark mb-2 text-truncate" title="${tour.name}">
-                ${tour.name}
-              </h6>
-
-              <div class="d-flex align-items-center gap-2 text-muted mb-3 small" style="font-size: 13px;">
-                <span><i class="bi bi-geo-alt-fill text-warning"></i> ${tour.city}</span>
-                <span>•</span>
-                <span><i class="bi bi-clock-fill text-warning"></i> ${tour.duration}</span>
-              </div>
-
-              <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center">
-              
-                <span class="fw-bold text-warning fs-5">$${tour.price}</span>
-                
-                <a href="Booking.html?tourId=${tour.id}" class="btn btn-warning btn-sm px-3 rounded-2 fw-semibold">
-                  Book Now
-                </a>
-              </div>
-            </div>
-
+            
+            <a href="Booking.html?tourId=${tour.id}" class="btn btn-luxury-gold btn-sm px-3 py-2 rounded-pill label-md text-uppercase">
+              Book Now
+            </a>
           </div>
         </div>
-      `;
+
+      </div>
+    </div>
+  `;
   });
 }
-
 
 function filterTours() {
   let city = cityFilter.value;
