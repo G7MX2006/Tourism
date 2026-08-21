@@ -1,3 +1,5 @@
+import { checkAuth } from "./main.js";
+
 let cards = document.getElementById("cont-cards");
 let allTours = [];
 let API_Tour = "http://localhost:3000/tours";
@@ -8,40 +10,7 @@ const priceVal = document.getElementById("price-val");
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const userDisplayName = document.getElementById("userDisplayName");
-  const authBtn = document.getElementById("authBtn");
-
-
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-  if (currentUser) {
-
-    userDisplayName.textContent = ` ${currentUser.name}`;
-    authBtn.textContent = "Log out";
-    authBtn.href = "#";
-
-
-    authBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      localStorage.removeItem("currentUser");
-      window.location.reload();
-    });
-  } else {
-
-    userDisplayName.textContent = "";
-    authBtn.textContent = "Login";
-    authBtn.href = "./signin.html";
-  }
-});
-
-
-
-
-
-
-
-
+checkAuth();
 
 async function FetchTours() {
   try {
