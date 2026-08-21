@@ -21,20 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterPrice = document.getElementById('filterPrice');
     const resetFiltersBtn = document.getElementById('resetFilters');
 
-    // تهيئة الـ Modals الثلاثة
+    // Pop ups
     const authModal = new bootstrap.Modal(document.getElementById('authModal'));
     const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
     const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
     let itemToDeleteId = null;
 
-    // رسالة التحقق أسفل الفورم
+    // إنشاء عنصر الرسالة وتنسيقه بالـ CSS وعمل Append
     let errorMsg = document.createElement("p");
     errorMsg.id = "errorMsg";
     errorMsg.style.color = "#ff6b6b";
     errorMsg.style.fontSize = "0.85rem";
     errorMsg.style.marginTop = "10px";
     errorMsg.style.textAlign = "center";
+
     bookingForm.appendChild(errorMsg);
 
     if (travelDate) {
@@ -57,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const TOURS_API = 'http://localhost:3000/tours';
     const BOOKINGS_API = 'http://localhost:3000/bookings';
 
-    const nameReg = /^[A-Za-z\u0600-\u06FF]{3,}( [A-Za-z\u0600-\u06FF]{3,})+$/;
-    const emailReg = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    const nameReg = /^[A-Za-z]{3,}( [A-Za-z]{3,})+$/;
+    const emailReg = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.com$/;
 
     async function fetchTours() {
         try {
@@ -142,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         errorMsg.textContent = "";
+        errorMsg.style.color = "#ff6b6b";
 
         const loggedUser = JSON.parse(localStorage.getItem('currentUser'));
         if (!loggedUser) {
@@ -163,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         if (!emailReg.test(email.value.trim())) {
-            errorMsg.textContent = "Please enter a valid email address";
+            errorMsg.textContent = "Please enter a valid email ending with .com";
             return;
         }
         if (!phone.value.trim()) {
@@ -203,6 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error saving booking:', error);
+            errorMsg.style.color = "#ff6b6b";
             errorMsg.textContent = "Connection error, make sure server is running!";
         }
     });
@@ -211,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingsList.innerHTML = '';
 
         if (!list || list.length === 0) {
-            bookingsList.innerHTML = '<tr><td colspan="8" class="text-muted py-3 text-center">No bookings found.</td></tr>';
+            bookingsList.innerHTML = '<tr><td colspan="8" class="text-muted py-3">No bookings found.</td></tr>';
             return;
         }
 
