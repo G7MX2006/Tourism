@@ -1,7 +1,5 @@
 import { checkAuth } from "./main.js";
 
-
-
 document.addEventListener('DOMContentLoaded', async () => {
   checkAuth();
   initNewsletterForm();
@@ -38,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error(error);
   }
 });
+
 async function getDestinations() {
   let response = await fetch('http://localhost:3000/destinations');
   if (!response.ok) {
@@ -46,19 +45,16 @@ async function getDestinations() {
   let destinations = await response.json();
   return destinations;
 }
+
 function initNewsletterForm() {
   const newsletterForm = document.querySelector('.newsletter-section form');
   if (!newsletterForm) return;
-
   newsletterForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
     const form = e.currentTarget;
     const emailInput = form.querySelector('input[type="email"]');
-
     if (emailInput && emailInput.value.trim()) {
       form.reset();
-
       const modalElement = document.getElementById('newsletterModal');
       const newsletterModal = new bootstrap.Modal(modalElement);
       newsletterModal.show();

@@ -8,8 +8,6 @@ const priceFilter = document.getElementById("price-filter");
 const sortFilter = document.getElementById("sort-filter");
 const priceVal = document.getElementById("price-val");
 
-
-
 checkAuth();
 
 async function FetchTours() {

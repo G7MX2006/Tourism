@@ -1,20 +1,20 @@
 {
   "destinations": [
     {
-      "id": "d1",
-      "name": "Giza",
-      "subtitle": "Land of the Pyramids",
-      "description": "Home to the iconic Great Pyramids and the Sphinx.",
-      "rating": 4.9,
-      "image": "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80"
-    },
-    {
       "id": "d2",
       "name": "Cairo",
       "subtitle": "The Historic Capital",
       "description": "Explore timeless heritage, vibrant bazaars, and rich culture.",
       "rating": 4.8,
-      "image": "https://transcode-v2.app.engoo.com/image/fetch/f_auto,c_limit,w_1200,h_630,dpr_1/https://assets.app.engoo.com/images/1c3xVGGDmh4bevsepVMEV3.jpeg"
+      "image": "https://windows10spotlight.com/wp-content/uploads/2021/10/2a31958f4ddfdae80ee8798e96f083f6.jpg"
+    },
+    {
+      "id": "d1",
+      "name": "Giza",
+      "subtitle": "Land of the Pyramids",
+      "description": "Home to the iconic Great Pyramids and the Sphinx.",
+      "rating": 4.9,
+      "image": "https://ohmyfacts.com/wp-content/uploads/2024/06/45-facts-about-the-pyramids-of-giza-1718022962.jpg"
     },
     {
       "id": "d3",
@@ -22,7 +22,7 @@
       "subtitle": "World's Greatest Open-Air Museum",
       "description": "Discover ancient temples and the legendary Valley of the Kings.",
       "rating": 4.9,
-      "image": "https://egyptunitedtours.com/wp-content/uploads/2024/11/Luxor-and-the-Valley-of-the-Kings.jpg"
+      "image": "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_900/w_74,x_13,y_13,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/lwynnieyoul793opu1go/TourofKarnakandLuxorTemplesfromLuxorwithlunch.jpg"
     },
     {
       "id": "d4",
@@ -30,7 +30,7 @@
       "subtitle": "Jewel of the Nile",
       "description": "Relax along the tranquil Nile and witness majestic Nubian culture.",
       "rating": 4.7,
-      "image": "https://blueniletours.com/wp-content/uploads/2025/08/abu-simbel-temples.jpg"
+      "image": "https://images.pexels.com/photos/35556385/pexels-photo-35556385.jpeg"
     },
     {
       "id": "d5",
@@ -38,7 +38,7 @@
       "subtitle": "The Pearl of the Mediterranean",
       "description": "Coastal charm mixed with Greco-Roman history and famous landmarks.",
       "rating": 4.6,
-      "image": "https://www.wowabouts.com/z-media/2018/10/Bibliotheca%20Alexandrina%202.jpg"
+      "image": "https://www.touristegypt.com/wp-content/uploads/2023/03/alexandria-egypt-1024x683.jpg"
     },
     {
       "id": "d6",
@@ -46,7 +46,7 @@
       "subtitle": "Paradise of Marine Life",
       "description": "World-class diving, vibrant coral reefs, and island adventures.",
       "rating": 4.9,
-      "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80"
+      "image": "https://images.pexels.com/photos/38845963/pexels-photo-38845963.jpeg"
     }
   ],
   "tours": [
@@ -302,6 +302,12 @@
       "name": "gkisgsgnp",
       "email": "gmrgfpffgdfFDFffsdfdddfdwddwdklfffd@gmail.com",
       "password": "12345678"
+    },
+    {
+      "id": "pJEzrtCiXGg",
+      "name": "Mostafa Tarek",
+      "email": "test100@gmail.com",
+      "password": "MostafaTarek"
     }
   ],
   "bookings": [
@@ -315,6 +321,19 @@
       "fullName": "ali ahmed ali",
       "email": "gmali23@gmail.com",
       "phone": "+201018274930",
+      "notes": "",
+      "status": "Confirmed"
+    },
+    {
+      "id": "rNDYLxYW7gc",
+      "tourName": "Abu Simbel Temples Day Trip",
+      "city": "Aswan",
+      "date": "2026-08-28",
+      "travelers": 10,
+      "total": 1500,
+      "fullName": "Mostafa Tarek",
+      "email": "test100@gmail.com",
+      "phone": "+201288447236",
       "notes": "",
       "status": "Confirmed"
     }
