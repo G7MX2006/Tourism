@@ -1,33 +1,9 @@
+import { checkAuth } from "./main.js";
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const userDisplayName = document.getElementById("userDisplayName");
-  const authBtn = document.getElementById("authBtn");
-
-
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-  if (currentUser) {
-
-    userDisplayName.textContent = ` ${currentUser.name}`;
-    authBtn.textContent = "Log out";
-    authBtn.href = "#";
-
-
-    authBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      localStorage.removeItem("currentUser");
-      window.location.reload();
-    });
-  } else {
-
-    userDisplayName.textContent = "";
-    authBtn.textContent = "Login";
-    authBtn.href = "./signin.html";
-  }
-});
 
 document.addEventListener('DOMContentLoaded', async () => {
+  checkAuth();
   initNewsletterForm();
   const container = document.getElementById('regions-grid');
   try {
