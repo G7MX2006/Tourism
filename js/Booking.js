@@ -21,6 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterPrice = document.getElementById('filterPrice');
     const resetFiltersBtn = document.getElementById('resetFilters');
 
+    // إنشاء عنصر الرسالة وتنسيقه بالـ CSS وعمل Append
+    let errorMsg = document.createElement("p");
+    errorMsg.id = "errorMsg";
+    errorMsg.style.color = "#ff6b6b";
+    errorMsg.style.fontSize = "0.85rem";
+    errorMsg.style.marginTop = "10px";
+    errorMsg.style.textAlign = "center";
+
+    bookingForm.appendChild(errorMsg);
+
     if (travelDate) {
         travelDate.min = new Date().toISOString().split('T')[0];
     }
@@ -86,9 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ===================================================
-    // الدالة 4: جلب حجوزات الإيميل الحالي فقط
-    // ===================================================
     async function fetchBookings() {
         try {
             const res = await fetch(BOOKINGS_API);
@@ -128,32 +135,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        errorMsg.textContent = "";
+        errorMsg.style.color = "#ff6b6b";
 
         const loggedUser = JSON.parse(localStorage.getItem('currentUser'));
         if (!loggedUser) {
-            alert('Please log in first to book your trip.');
-            window.location.href = './signin.html';
+            errorMsg.textContent = "Please log in first to book your trip.";
+            setTimeout(() => {
+                window.location.href = './signin.html';
+            }, 1500);
             return;
         }
 
         if (!tourSelect.value) {
-            alert('Please select a tour');
+            errorMsg.textContent = "Please select a tour";
             return;
         }
         if (!travelDate.value) {
-            alert('Please select travel date');
+            errorMsg.textContent = "Please select travel date";
             return;
         }
         if (!nameReg.test(fullName.value.trim())) {
-            alert('Please enter a valid full name (First and Last name, at least 3 letters each)');
+            errorMsg.textContent = "Please enter a valid full name (First and Last name, at least 3 letters each)";
             return;
         }
         if (!emailReg.test(email.value.trim())) {
-            alert('Please enter a valid email ending with .com');
+            errorMsg.textContent = "Please enter a valid email ending with .com";
             return;
         }
         if (!phone.value.trim()) {
-            alert('Please enter your phone number');
+            errorMsg.textContent = "Please enter your phone number";
             return;
         }
 
@@ -185,10 +196,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 bookingForm.reset();
                 updateSummary();
                 await fetchBookings();
-                alert('Your expedition has been successfully booked!');
+                errorMsg.style.color = "#20c997";
+                errorMsg.textContent = "Your expedition has been successfully booked!";
+                setTimeout(() => {
+                    errorMsg.textContent = "";
+                }, 4000);
             }
         } catch (error) {
             console.error('Error saving booking:', error);
+            errorMsg.style.color = "#ff6b6b";
+            errorMsg.textContent = "Connection error, make sure server is running!";
         }
     });
 
