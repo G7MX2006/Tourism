@@ -1,7 +1,7 @@
 let loginForm = document.getElementById("loginForm");
 let emailInput = document.getElementById("email");
-let passwordInput = document.getElementById("pass"); 
-let rememberMe = document.getElementById("rem");
+let passwordInput = document.getElementById("pass");
+let rememberMe = document.getElementById("checkme") || document.getElementById("rem");
 
 let errorMsg = document.createElement("p");
 errorMsg.id = "errorMsg";
@@ -38,8 +38,10 @@ async function Login(email, password) {
             return;
         }
 
+     
         localStorage.setItem("currentUser", JSON.stringify(matchedUser));
 
+       
         if (rememberMe && rememberMe.checked) {
             localStorage.setItem("rememberedEmail", email);
         } else {
@@ -47,7 +49,11 @@ async function Login(email, password) {
         }
 
         alert("Logged in successfully!");
-        window.location.href = "../index.html";
+
+       
+        const previousPage = sessionStorage.getItem("returnUrl") || "../index.html";
+        sessionStorage.removeItem("returnUrl");
+        window.location.href = previousPage;
 
     } catch (err) {
         errorMsg.textContent = "Connection error, make sure server is running!";
