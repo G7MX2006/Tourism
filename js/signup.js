@@ -3,6 +3,7 @@ let nameInput = document.getElementById("name");
 let emailInput = document.getElementById("email");
 let passwordInput = document.getElementById("pass");
 let confirmPasswordInput = document.getElementById("cpass");
+let rememberMe = document.getElementById("rem");
 
 let errorMsg = document.createElement("p");
 errorMsg.id = "errorMsg";
@@ -15,6 +16,13 @@ signupForm.appendChild(errorMsg);
 
 const API_URL = "http://localhost:3000/users";
 const nameRegex = /^[A-Za-z\u0600-\u06FF\s]{3,35}$/;
+const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+const savedEmail = localStorage.getItem("rememberedEmail");
+if (savedEmail) {
+    emailInput.value = savedEmail;
+    if (rememberMe) rememberMe.checked = true;
+}
 
 async function Register(userData) {
     try {
@@ -31,14 +39,21 @@ async function Register(userData) {
             return;
         }
 
-        alert("Account created successfully!");
-        window.location.href = "../index.html";
+        localStorage.setItem("currentUser", JSON.stringify(userData));
+
+        if (rememberMe && rememberMe.checked) {
+            localStorage.setItem("rememberedEmail", userData.email);
+        } else {
+            localStorage.removeItem("rememberedEmail");
+        }
+
+       
+        window.location.href = window.location.origin + "/index.html";
 
     } catch (err) {
         errorMsg.textContent = "Connection error, make sure server is running!";
     }
 }
-
 signupForm.addEventListener("submit", async function (e) {
     e.preventDefault();
     errorMsg.textContent = "";
@@ -48,9 +63,13 @@ signupForm.addEventListener("submit", async function (e) {
     let password = passwordInput.value.trim();
     let confirmPassword = confirmPasswordInput.value.trim();
 
-    
     if (!nameRegex.test(name)) {
-        errorMsg.textContent = "Name must contain letters only (no numbers allowed).";
+        errorMsg.textContent = "Name must contain letters only (at least 3 characters).";
+        return;
+    }
+
+    if (!emailRegex.test(email)) {
+        errorMsg.textContent = "Please enter a valid email address.";
         return;
     }
 
@@ -67,7 +86,7 @@ signupForm.addEventListener("submit", async function (e) {
     try {
         let checkResponse = await fetch(API_URL);
         if (!checkResponse.ok) {
-            alert("Error fetching users data");
+            errorMsg.textContent = "Error fetching users data";
             return;
         }
 
@@ -85,11 +104,12 @@ signupForm.addEventListener("submit", async function (e) {
     }
 
     const newUser = {
-        id: Date.now(),
+        id: Date.now().toString(),
         name: name,
         email: email,
         password: password
     };
 
     await Register(newUser);
+
 });
