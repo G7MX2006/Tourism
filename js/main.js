@@ -1,35 +1,38 @@
 
-document.addEventListener("DOMContentLoaded", () => {
+export function checkAuth() {
   const userDisplayName = document.getElementById("userDisplayName");
   const authBtn = document.getElementById("authBtn");
 
+  if (!userDisplayName || !authBtn) return;
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   if (currentUser) {
-
     userDisplayName.textContent = ` ${currentUser.name}`;
     authBtn.textContent = "Log out";
     authBtn.href = "#";
 
-
+   
     authBtn.addEventListener("click", (e) => {
       e.preventDefault();
       localStorage.removeItem("currentUser");
       window.location.reload();
     });
   } else {
-
     userDisplayName.textContent = "";
     authBtn.textContent = "Login";
-    authBtn.href = "./pages/signin.html";
-  }
-});
+    authBtn.href = "/pages/signin.html";
 
+    authBtn.addEventListener("click", () => {
+      sessionStorage.setItem("returnUrl", window.location.href);
+    });
+  }
+}
 
 
 
 document.addEventListener('DOMContentLoaded', async () => {
+  checkAuth();
   initNewsletterForm();
   try {
     const destinations = await getDestinations();
