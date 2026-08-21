@@ -1,251 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tour Booking | Egypt Heritage</title>
-
-    <!-- Bootstrap & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
+    <title>Book Your Tour | Egypt Heritage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet" />
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-    <!-- ربط ملف home.css الموحد -->
-    <link rel="stylesheet" href="../css/home.css">
-
-    <style>
-        .table thead th {
-            font-size: 11px;
-            letter-spacing: 0.1em;
-            color: #4e4639;
-            background-color: #f6f3ed;
-            border-bottom: 1px solid rgba(119, 90, 25, 0.15);
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border-color: #775a19;
-            box-shadow: 0 0 0 0.25rem rgba(119, 90, 25, 0.15);
-        }
-    </style>
+    <link rel="stylesheet" href="../css/booking.css">
 </head>
 
-<body class="bg-surface-custom">
+<body class="bg-dark text-white py-4">
+    <div class="container my-4">
+        <h1 class="font-headline text-center text-gold mb-4">Book Your Luxury Expedition</h1>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top custom-luxury-nav transition-all">
-        <div class="container-xl px-3 px-lg-5">
-
-            <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="../index.html">
-                <span class="material-symbols-outlined text-gold fs-3">temple_hindu</span>
-                <div class="d-flex flex-column text-start">
-                    <span class="font-headline fw-bold tracking-wider text-white logo-text text-nowrap">EGYPT
-                        HERITAGE</span>
-                    <span class="label-md text-gold text-uppercase text-nowrap"
-                        style="font-size: 8px; letter-spacing: 0.25em; margin-top: -3px;">Bespoke Journeys</span>
-                </div>
-            </a>
-
-            <button class="navbar-toggler border-0 shadow-none text-white p-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#luxuryNavbar">
-                <span class="material-symbols-outlined fs-2 text-gold">menu</span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-between" id="luxuryNavbar">
-
-                <ul class="navbar-nav mx-auto align-items-lg-center gap-lg-3 gap-xl-4 my-3 my-lg-0 text-center">
-                    <li class="nav-item">
-                        <a class="nav-link nav-luxury-link text-nowrap" href="../index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-luxury-link text-nowrap" href="./Destiantions.html">Destinations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-luxury-link text-nowrap" href="./Tours.html">Curated Tours</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-luxury-link text-nowrap active" href="./Booking.html">Plan My Trip</a>
-                    </li>
-                </ul>
-
-                <div
-                    class="nav-auth-wrapper d-flex align-items-center justify-content-center justify-content-lg-end gap-3">
-                    <span id="userDisplayName" class="text-gold fw-medium small text-nowrap me-2"></span>
-                    <a href="#" id="authBtn"
-                        class="btn btn-luxury-gold rounded-pill px-4 py-2 label-md text-uppercase text-nowrap"></a>
-                </div>
-
-            </div>
-
-        </div>
-    </nav>
-
-    <!-- Header Section -->
-    <header class="hero-section d-flex align-items-center justify-content-center overflow-hidden position-relative pt-5"
-        style="height: 45vh; min-height: 380px;">
-        <div class="position-absolute top-0 start-0 w-100 h-100 hero-bg"
-            style="background-image: url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center;">
-        </div>
-        <div class="position-absolute top-0 start-0 w-100 h-100 hero-overlay"></div>
-
-        <div class="container-xl position-relative z-1 text-center px-3 px-lg-5 mt-4">
-            <span
-                class="label-md text-primary-custom text-uppercase d-flex align-items-center justify-content-center gap-3 mb-2"
-                style="letter-spacing: 0.25em;">
-                <span style="width: 25px; height: 1px; background-color: var(--primary, #775a19);"></span>
-                Reservation Desk
-                <span style="width: 25px; height: 1px; background-color: var(--primary, #775a19);"></span>
-            </span>
-            <h1 class="font-headline display-lg d-none d-md-block text-dark mb-2">Complete Your Booking</h1>
-            <h1 class="font-headline display-lg-mobile d-md-none text-dark mb-2">Complete Your Booking</h1>
-            <p class="text-on-surface-variant mx-auto fs-6" style="max-width: 600px;">Fill in the details below to
-                finalize your bespoke expedition and confirm your reservation.</p>
-        </div>
-    </header>
-
-    <!-- Form & Summary Section -->
-    <div class="container-xl px-3 px-lg-5 my-5">
         <div class="row g-4">
-
-            <!-- Booking Form -->
-            <div class="col-12 col-lg-8">
-                <form id="bookingForm" class="p-4 p-md-5 bg-white rounded-4 border shadow-sm">
-                    <h4 class="font-headline fw-bold text-dark mb-4 border-bottom pb-3">Traveler Information</h4>
-
-                    <div class="mb-3">
-                        <label for="tourSelect" class="form-label label-md text-muted">Select Tour</label>
-                        <select id="tourSelect" class="form-select rounded-3 py-2">
-                            <option value="">Select a Tour...</option>
-                        </select>
-                    </div>
-
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <label for="travelDate" class="form-label label-md text-muted">Travel Date</label>
-                            <input type="date" id="travelDate" class="form-control rounded-3 py-2" required>
+            <!-- Booking Form Column -->
+            <div class="col-12 col-lg-7">
+                <div
+                    class="glass-card p-4 rounded-4 shadow-sm border border-secondary border-opacity-25 bg-black bg-opacity-25">
+                    <form id="bookingForm" class="d-flex flex-column gap-3">
+                        <div>
+                            <label for="tourSelect" class="form-label text-white-50 small text-uppercase">Select
+                                Tour</label>
+                            <select id="tourSelect" class="form-select bg-dark text-white border-secondary" required>
+                                <option value="">Select a Tour...</option>
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <label for="travelers" class="form-label label-md text-muted">Travelers</label>
-                            <input type="number" id="travelers" class="form-control rounded-3 py-2" min="1" value="1"
-                                required>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="travelDate" class="form-label text-white-50 small text-uppercase">Travel
+                                    Date</label>
+                                <input type="date" id="travelDate"
+                                    class="form-control bg-dark text-white border-secondary" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="travelers"
+                                    class="form-label text-white-50 small text-uppercase">Travelers</label>
+                                <input type="number" id="travelers"
+                                    class="form-control bg-dark text-white border-secondary" min="1" max="20" value="1"
+                                    required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <label for="fullName" class="form-label label-md text-muted">Full Name</label>
-                            <input type="text" id="fullName" class="form-control rounded-3 py-2"
-                                placeholder="e.g. Nour Ali" required>
+                        <div>
+                            <label for="fullName" class="form-label text-white-50 small text-uppercase">Full
+                                Name</label>
+                            <input type="text" id="fullName" class="form-control bg-dark text-white border-secondary"
+                                placeholder="e.g. John Doe" required>
                         </div>
-                        <div class="col-md-6">
-                            <label for="email" class="form-label label-md text-muted">Email Address</label>
-                            <input type="email" id="email" class="form-control rounded-3 py-2"
-                                placeholder="you@example.com" required>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="email" class="form-label text-white-50 small text-uppercase">Email</label>
+                                <input type="email" id="email" class="form-control bg-dark text-white border-secondary"
+                                    placeholder="name@example.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label text-white-50 small text-uppercase">Phone</label>
+                                <input type="tel" id="phone" class="form-control bg-dark text-white border-secondary"
+                                    placeholder="+20 123 456 7890" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="phone" class="form-label label-md text-muted">Phone Number</label>
-                        <input type="tel" id="phone" class="form-control rounded-3 py-2" placeholder="+20 100 000 0000"
-                            required>
-                    </div>
+                        <div>
+                            <label for="notes" class="form-label text-white-50 small text-uppercase">Special
+                                Notes</label>
+                            <textarea id="notes" class="form-control bg-dark text-white border-secondary" rows="2"
+                                placeholder="Any special requirements..."></textarea>
+                        </div>
 
-                    <div class="mb-4">
-                        <label for="notes" class="form-label label-md text-muted">Special Requests (Optional)</label>
-                        <textarea id="notes" class="form-control rounded-3" rows="3"
-                            placeholder="Dietary needs, accessibility requests, or custom preferences."></textarea>
-                    </div>
-
-                    <button type="submit"
-                        class="btn btn-luxury-gold rounded-pill px-5 py-3 label-md text-uppercase w-100 w-md-auto">
-                        Confirm Booking
-                    </button>
-                </form>
+                        <button type="submit"
+                            class="btn btn-warning text-dark fw-bold py-2 rounded-pill text-uppercase mt-2">Confirm
+                            Booking</button>
+                    </form>
+                </div>
             </div>
 
-            <!-- Summary Card -->
-            <div class="col-12 col-lg-4">
-                <div class="card border rounded-4 p-4 shadow-sm bg-white sticky-top" style="top: 100px;">
-                    <span class="label-md text-primary-custom text-uppercase d-block mb-1"
-                        style="letter-spacing: 0.1em; font-size: 11px;">Overview</span>
-                    <h5 class="font-headline fw-bold text-dark mb-3 border-bottom pb-2">Trip Summary</h5>
+            <!-- Booking Summary Column -->
+            <div class="col-12 col-lg-5">
+                <div
+                    class="glass-card p-4 rounded-4 shadow-sm border border-secondary border-opacity-25 bg-black bg-opacity-25 h-100">
+                    <h4 class="text-gold mb-3">Expedition Summary</h4>
 
-                    <div id="summaryPlaceholder" class="text-muted small py-3">
-                        Please select a tour from the form to view estimated pricing and details.
+                    <div id="summaryPlaceholder" class="text-white-50 text-center py-5">
+                        <i class="bi bi-info-circle fs-3 d-block mb-2"></i>
+                        <p>Select a tour to view breakdown</p>
                     </div>
 
                     <div id="summaryContent" class="d-none">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <span id="summaryTourName" class="fw-bold text-dark fs-6 font-headline"></span>
+                        <h5 id="summaryTourName" class="text-white mb-3">Tour Name</h5>
+                        <hr class="border-secondary">
+                        <div class="d-flex justify-content-between text-white-50 mb-2">
+                            <span>Base Rate:</span>
+                            <span id="summaryCalc">$0 × 1</span>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="text-muted small">Calculation:</span>
-                            <span id="summaryCalc" class="text-muted small"></span>
-                        </div>
-
-                        <hr class="my-3">
-
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="fw-bold fs-6">Estimated Total:</span>
-                            <span id="summaryTotal" class="font-headline fw-bold fs-4 text-primary-custom"></span>
-                        </div>
-
-                        <div class="p-3 bg-surface-low rounded-3 border">
-                            <small class="text-on-surface-variant d-block" style="font-size: 12px; line-height: 1.5;">
-                                <i class="bi bi-shield-check text-gold me-1"></i> Includes verified Egyptologist guide,
-                                all luxury transfers & entrance permits.
-                            </small>
+                        <div
+                            class="d-flex justify-content-between text-white fw-bold fs-5 mt-4 pt-2 border-top border-secondary">
+                            <span>Total:</span>
+                            <span id="summaryTotal" class="text-success">$0</span>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- Saved Bookings List Table -->
-        <div class="mt-5 pt-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <div>
-                    <span class="label-md text-primary-custom text-uppercase d-block mb-1"
-                        style="letter-spacing: 0.15em;">Active Reservations</span>
-                    <h3 class="font-headline fw-bold text-dark mb-0">Your Confirmed Bookings</h3>
+        <!-- Filter & Bookings Table -->
+        <div class="mt-5 p-4 rounded-4 border border-secondary border-opacity-25 bg-black bg-opacity-25">
+            <h3 class="text-gold mb-4">Your Recent Bookings</h3>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-5">
+                    <label for="filterCity" class="form-label text-white-50 small text-uppercase">Filter by City</label>
+                    <select id="filterCity" class="form-select bg-dark text-white border-secondary">
+                        <option value="all">All Cities</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label for="filterPrice" class="form-label text-white-50 small text-uppercase">Filter by Max
+                        Price</label>
+                    <input type="number" id="filterPrice" class="form-control bg-dark text-white border-secondary"
+                        placeholder="Enter maximum price">
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button id="resetFilters" class="btn btn-outline-secondary w-100">Reset</button>
                 </div>
             </div>
 
-            <!-- Filters Bar -->
-            <div class="card p-4 bg-white mb-4 rounded-4 border shadow-sm">
-                <div class="row g-3 align-items-end">
-                    <div class="col-12 col-md-4">
-                        <label for="filterCity" class="form-label label-md text-muted">Destination City</label>
-                        <select id="filterCity" class="form-select rounded-3">
-                            <option value="all">All Cities</option>
-                        </select>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <label for="filterPrice" class="form-label label-md text-muted">Max Total Price ($)</label>
-                        <input type="number" id="filterPrice" class="form-control rounded-3" placeholder="e.g. 500">
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <button id="resetFilters"
-                            class="btn btn-outline-dark rounded-pill w-100 py-2 label-md text-uppercase">
-                            Reset Filters
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bookings Table -->
-            <div class="table-responsive bg-white rounded-4 shadow-sm border p-3">
-                <table class="table align-middle text-center mb-0">
+            <div class="table-responsive">
+                <table class="table table-dark table-hover align-middle">
                     <thead>
-                        <tr class="text-uppercase small">
+                        <tr class="text-white-50 text-uppercase small">
                             <th>Tour</th>
                             <th>Date</th>
                             <th>Travelers</th>
@@ -256,52 +145,69 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="bookingsList"></tbody>
+                    <tbody id="bookingsList">
+                        <!-- Dynamic Records -->
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="py-5 text-white mt-5"
-        style="background-color: #132834; border-top: 1px solid rgba(119, 90, 25, 0.2);">
-        <div class="container-xl px-3 px-lg-5 py-4">
-            <div
-                class="row g-4 justify-content-between align-items-center border-bottom border-secondary border-opacity-25 pb-4 mb-4">
-                <div class="col-12 col-md-6 text-center text-md-start">
-                    <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
-                        <span class="material-symbols-outlined text-gold fs-3">temple_hindu</span>
-                        <span class="font-headline fw-bold text-white fs-4">EGYPT HERITAGE</span>
+    <!-- Modals Section -->
+    <!-- 1. Modal: Not Logged In -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white rounded-4 border border-secondary shadow-lg">
+                <div class="modal-body text-center p-4">
+                    <i class="bi bi-person-x fs-1 text-warning mb-2 d-block"></i>
+                    <h5 class="modal-title mb-2">Login Required</h5>
+                    <p class="text-white-50 small mb-4">Please log in first to book your luxury expedition.</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-secondary px-3 rounded-pill"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <a href="./signin.html" class="btn btn-warning px-4 rounded-pill">Sign In</a>
                     </div>
-                    <p class="text-white-50 small mb-0" style="max-width: 400px;">
-                        Private, considered journeys through Egypt — designed one traveler at a time.
-                    </p>
-                </div>
-
-                <div class="col-12 col-md-6 text-center text-md-end">
-                    <div
-                        class="d-flex flex-wrap justify-content-center justify-content-md-end gap-4 label-md text-uppercase">
-                        <a href="../index.html" class="text-white-50 text-decoration-none hover-gold">Home</a>
-                        <a href="./Destiantions.html"
-                            class="text-white-50 text-decoration-none hover-gold">Destinations</a>
-                        <a href="./Tours.html" class="text-white-50 text-decoration-none hover-gold">Tours</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center text-white-50 small">
-                <p class="mb-2 mb-sm-0">© 2026 Egypt Heritage. All rights reserved.</p>
-                <div class="d-flex gap-3">
-                    <a href="#" class="text-white-50 text-decoration-none hover-gold">Privacy Policy</a>
-                    <span>•</span>
-                    <a href="#" class="text-white-50 text-decoration-none hover-gold">Terms of Service</a>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 2. Modal: Booking Success -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white rounded-4 border border-secondary shadow-lg">
+                <div class="modal-body text-center p-4">
+                    <i class="bi bi-check-circle-fill fs-1 text-success mb-2 d-block"></i>
+                    <h5 class="modal-title mb-2">Booking Confirmed!</h5>
+                    <p class="text-white-50 small mb-4">Your expedition has been successfully reserved.</p>
+                    <button type="button" class="btn btn-success px-4 rounded-pill"
+                        data-bs-dismiss="modal">Great</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Modal: Delete Confirmation -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white rounded-4 border border-secondary shadow-lg">
+                <div class="modal-body text-center p-4">
+                    <i class="bi bi-trash3-fill fs-1 text-danger mb-2 d-block"></i>
+                    <h5 class="modal-title mb-2">Cancel Booking?</h5>
+                    <p class="text-white-50 small mb-4">Are you sure you want to delete this expedition? This action
+                        cannot be undone.</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-secondary px-3 rounded-pill" data-bs-dismiss="modal">Keep
+                            It</button>
+                        <button type="button" id="confirmDeleteBtn" class="btn btn-danger px-4 rounded-pill">Yes,
+                            Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/Booking.js"></script>
 </body>
 
