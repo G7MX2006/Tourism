@@ -21,14 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterPrice = document.getElementById('filterPrice');
     const resetFiltersBtn = document.getElementById('resetFilters');
 
-    // إنشاء عنصر الرسالة وتنسيقه بالـ CSS وعمل Append
+    // تهيئة الـ Modals الثلاثة
+    const authModal = new bootstrap.Modal(document.getElementById('authModal'));
+    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    let itemToDeleteId = null;
+
+    // رسالة التحقق أسفل الفورم
     let errorMsg = document.createElement("p");
     errorMsg.id = "errorMsg";
     errorMsg.style.color = "#ff6b6b";
     errorMsg.style.fontSize = "0.85rem";
     errorMsg.style.marginTop = "10px";
     errorMsg.style.textAlign = "center";
-
     bookingForm.appendChild(errorMsg);
 
     if (travelDate) {
@@ -51,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const TOURS_API = 'http://localhost:3000/tours';
     const BOOKINGS_API = 'http://localhost:3000/bookings';
 
-    const nameReg = /^[A-Za-z]{3,}( [A-Za-z]{3,})+$/;
-    const emailReg = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.com$/;
+    const nameReg = /^[A-Za-z\u0600-\u06FF]{3,}( [A-Za-z\u0600-\u06FF]{3,})+$/;
+    const emailReg = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
     async function fetchTours() {
         try {
@@ -136,14 +142,11 @@ document.addEventListener('DOMContentLoaded', () => {
     bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         errorMsg.textContent = "";
-        errorMsg.style.color = "#ff6b6b";
 
         const loggedUser = JSON.parse(localStorage.getItem('currentUser'));
         if (!loggedUser) {
-            errorMsg.textContent = "Please log in first to book your trip.";
-            setTimeout(() => {
-                window.location.href = './signin.html';
-            }, 1500);
+            sessionStorage.setItem("returnUrl", window.location.href);
+            authModal.show();
             return;
         }
 
@@ -160,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         if (!emailReg.test(email.value.trim())) {
-            errorMsg.textContent = "Please enter a valid email ending with .com";
+            errorMsg.textContent = "Please enter a valid email address";
             return;
         }
         if (!phone.value.trim()) {
@@ -196,15 +199,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 bookingForm.reset();
                 updateSummary();
                 await fetchBookings();
-                errorMsg.style.color = "#20c997";
-                errorMsg.textContent = "Your expedition has been successfully booked!";
-                setTimeout(() => {
-                    errorMsg.textContent = "";
-                }, 4000);
+                successModal.show();
             }
         } catch (error) {
             console.error('Error saving booking:', error);
-            errorMsg.style.color = "#ff6b6b";
             errorMsg.textContent = "Connection error, make sure server is running!";
         }
     });
@@ -213,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingsList.innerHTML = '';
 
         if (!list || list.length === 0) {
-            bookingsList.innerHTML = '<tr><td colspan="8" class="text-muted py-3">No bookings found.</td></tr>';
+            bookingsList.innerHTML = '<tr><td colspan="8" class="text-muted py-3 text-center">No bookings found.</td></tr>';
             return;
         }
 
@@ -228,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${item.email}</td>
                 <td><span class="badge bg-success">${item.status}</span></td>
                 <td>
-                    <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="window.removeBooking('${item.id}')">
+                    <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="window.askDeleteBooking('${item.id}')">
                         Delete
                     </button>
                 </td>
@@ -237,18 +235,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    window.removeBooking = async function (id) {
+    window.askDeleteBooking = function (id) {
+        itemToDeleteId = id;
+        deleteModal.show();
+    };
+
+    confirmDeleteBtn.addEventListener('click', async () => {
+        if (!itemToDeleteId) return;
+
         try {
-            const res = await fetch(`${BOOKINGS_API}/${id}`, {
+            const res = await fetch(`${BOOKINGS_API}/${itemToDeleteId}`, {
                 method: 'DELETE'
             });
             if (res.ok) {
+                deleteModal.hide();
                 await fetchBookings();
             }
         } catch (error) {
             console.error('Error deleting booking:', error);
+        } finally {
+            itemToDeleteId = null;
         }
-    };
+    });
 
     function applyFilters() {
         const selectedCity = filterCity.value;
