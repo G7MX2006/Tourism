@@ -1,130 +1,64 @@
 import { checkAuth } from "./main.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-
     checkAuth();
 
-    const tourSelect = document.getElementById('tourSelect');
-    const travelersInput = document.getElementById('travelers');
-    const bookingForm = document.getElementById('bookingForm');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const todayDate = new Date().toISOString().split('T')[0];
+
+   
     const fullName = document.getElementById('fullName');
     const email = document.getElementById('email');
-    const phone = document.getElementById('phone');
-    const travelDate = document.getElementById('travelDate');
-    const summaryContent = document.getElementById('summaryContent');
+
+    function fillUserData() {
+        if (currentUser) {
+            if (fullName) fullName.value = currentUser.name || currentUser.username || '';
+            if (email) email.value = currentUser.email || '';
+        }
+    }
+    fillUserData();
+
+    
+    let toursData = [];
+    const tourSelect = document.getElementById('tourSelect');
+
+    async function loadTours() {
+        try {
+            const res = await fetch('http://localhost:3000/tours');
+            toursData = await res.json();
+
+            tourSelect.innerHTML = '<option value="">Select a Tour...</option>';
+            if (editTourSelect) editTourSelect.innerHTML = '<option value="">Select a Tour...</option>';
+
+            toursData.forEach(tour => {
+                const opt = `<option value="${tour.id}">${tour.name} - $${tour.price}</option>`;
+                tourSelect.innerHTML += opt;
+                if (editTourSelect) editTourSelect.innerHTML += opt;
+            });
+
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const tourId = urlParams.get('tourId');
+            if (tourId) {
+                tourSelect.value = tourId;
+                updateSummary();
+            }
+        } catch (err) {
+            console.error("Error loading tours:", err);
+        }
+    }
+
+  
+    const travelersInput = document.getElementById('travelers');
     const summaryPlaceholder = document.getElementById('summaryPlaceholder');
+    const summaryContent = document.getElementById('summaryContent');
     const summaryTourName = document.getElementById('summaryTourName');
     const summaryCalc = document.getElementById('summaryCalc');
     const summaryTotal = document.getElementById('summaryTotal');
-    const bookingsList = document.getElementById('bookingsList');
-    const filterCity = document.getElementById('filterCity');
-    const filterPrice = document.getElementById('filterPrice');
-    const resetFiltersBtn = document.getElementById('resetFilters');
-
-    // Pop ups
-    const authModal = new bootstrap.Modal(document.getElementById('authModal'));
-    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-    let itemToDeleteId = null;
-
-    // إنشاء عنصر الرسالة وتنسيقه بالـ CSS وعمل Append
-    let errorMsg = document.createElement("p");
-    errorMsg.id = "errorMsg";
-    errorMsg.style.color = "#ff6b6b";
-    errorMsg.style.fontSize = "0.85rem";
-    errorMsg.style.marginTop = "10px";
-    errorMsg.style.textAlign = "center";
-
-    bookingForm.appendChild(errorMsg);
-
-    if (travelDate) {
-        travelDate.min = new Date().toISOString().split('T')[0];
-    }
-
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser) {
-        if (fullName && (currentUser.name || currentUser.username)) {
-            fullName.value = currentUser.name || currentUser.username;
-        }
-        if (email && currentUser.email) {
-            email.value = currentUser.email;
-        }
-    }
-
-    let toursData = [];
-    let bookingsData = [];
-
-    const TOURS_API = 'http://localhost:3000/tours';
-    const BOOKINGS_API = 'http://localhost:3000/bookings';
-
-    const nameReg = /^[A-Za-z]{3,}( [A-Za-z]{3,})+$/;
-    const emailReg = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.com$/;
-
-    async function fetchTours() {
-        try {
-            const res = await fetch(TOURS_API);
-            toursData = await res.json();
-
-            populateTourSelect(toursData);
-            populateCityFilter(toursData);
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const tourIdFromUrl = urlParams.get('tourId');
-
-            if (tourIdFromUrl) {
-                tourSelect.value = tourIdFromUrl;
-                updateSummary();
-            }
-        } catch (error) {
-            console.error('Error fetching tours:', error);
-        }
-    }
-
-    function populateTourSelect(tours) {
-        tourSelect.innerHTML = '<option value="">Select a Tour...</option>';
-        tours.forEach(tour => {
-            const option = document.createElement('option');
-            option.value = tour.id;
-            option.textContent = `${tour.name} - ${tour.city} ($${tour.price})`;
-            tourSelect.appendChild(option);
-        });
-    }
-
-    function populateCityFilter(tours) {
-        tours.forEach(tour => {
-            const exists = [...filterCity.options].some(op => op.value === tour.city);
-            if (!exists) {
-                const option = document.createElement('option');
-                option.value = tour.city;
-                option.textContent = tour.city;
-                filterCity.appendChild(option);
-            }
-        });
-    }
-
-    async function fetchBookings() {
-        try {
-            const res = await fetch(BOOKINGS_API);
-            const allBookings = await res.json();
-
-            if (currentUser && currentUser.email) {
-                bookingsData = allBookings.filter(
-                    item => item.email && item.email.toLowerCase() === currentUser.email.toLowerCase()
-                );
-            } else {
-                bookingsData = [];
-            }
-
-            renderBookings(bookingsData);
-        } catch (error) {
-            console.error('Error fetching bookings:', error);
-        }
-    }
 
     function updateSummary() {
         const selectedTour = toursData.find(t => String(t.id) === String(tourSelect.value));
-        const count = parseInt(travelersInput.value) || 1;
+        const count = parseInt(travelersInput.value, 10) || 1;
 
         if (selectedTour) {
             const total = selectedTour.price * count;
@@ -140,36 +74,109 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    tourSelect.addEventListener('change', updateSummary);
+    travelersInput.addEventListener('input', updateSummary);
+
+   
+    const bookingsList = document.getElementById('bookingsList');
+
+    async function loadBookings() {
+        try {
+            const res = await fetch('http://localhost:3000/bookings');
+            const allBookings = await res.json();
+
+            let myBookings = [];
+            if (currentUser && currentUser.email) {
+                myBookings = allBookings.filter(b => b.email.toLowerCase() === currentUser.email.toLowerCase());
+            }
+
+            bookingsList.innerHTML = '';
+            if (myBookings.length === 0) {
+                bookingsList.innerHTML = '<tr><td colspan="8" class="text-center py-3 text-muted">No bookings yet</td></tr>';
+                return;
+            }
+
+            myBookings.forEach(item => {
+                const tr = `
+                    <tr class="align-middle border-bottom border-light-subtle">
+                        <td class="fw-bold py-3 text-dark">${item.tourName}</td>
+                        <td class="text-secondary text-nowrap">${item.date}</td>
+                        <td class="text-secondary text-center">${item.travelers || 1}</td>
+                        <td class="fw-bold text-success text-center">$${item.total}</td>
+                        <td class="text-secondary text-nowrap">${item.fullName || ''}</td>
+                        <td class="text-muted small">${item.email || ''}</td>
+                        <td class="text-center">
+                            <span class="badge rounded-pill fw-normal px-3 py-2" style="background-color: #198754; color: #fff;">
+                                ${item.status || 'Confirmed'}
+                            </span>
+                        </td>
+                        <td class="text-nowrap text-end">
+                            <button class="btn btn-sm rounded-pill px-3 me-1 fw-semibold" 
+                                    style="background-color: #f5f0eb; color: #8c7355; border: 1px solid #d4c5b9;" 
+                                    onclick="askEditBooking('${item.id}')">
+                                Edit
+                            </button>
+                            <button class="btn btn-sm rounded-pill px-3 fw-semibold" 
+                                    style="background-color: #d9534f; color: #fff; border: none;" 
+                                    onclick="askDeleteBooking('${item.id}')">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                bookingsList.innerHTML += tr;
+            });
+
+        } catch (err) {
+            console.error("Error loading bookings:", err);
+        }
+    }
+
+   
+    const bookingForm = document.getElementById('bookingForm');
+    const travelDate = document.getElementById('travelDate');
+    const phone = document.getElementById('phone');
+    const authModal = new bootstrap.Modal(document.getElementById('authModal'));
+    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+
+    if (travelDate) travelDate.min = todayDate;
+
+    const errorMsg = document.createElement("p");
+    errorMsg.id = "errorMsg";
+    errorMsg.style.color = "#ff6b6b";
+    errorMsg.style.fontSize = "0.85rem";
+    errorMsg.style.marginTop = "10px";
+    errorMsg.style.textAlign = "center";
+    bookingForm.appendChild(errorMsg);
+
     bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         errorMsg.textContent = "";
-        errorMsg.style.color = "#ff6b6b";
 
-        const loggedUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (!loggedUser) {
+        if (!currentUser) {
             sessionStorage.setItem("returnUrl", window.location.href);
             authModal.show();
             return;
         }
 
         if (!tourSelect.value) {
-            errorMsg.textContent = "Please select a tour";
+            errorMsg.textContent = "Please select a tour!";
             return;
         }
         if (!travelDate.value) {
-            errorMsg.textContent = "Please select travel date";
+            errorMsg.textContent = "Please select a travel date!";
             return;
         }
-        if (!nameReg.test(fullName.value.trim())) {
-            errorMsg.textContent = "Please enter a valid full name (First and Last name, at least 3 letters each)";
+        if (!fullName.value.trim()) {
+            errorMsg.textContent = "Please enter your full name!";
             return;
         }
-        if (!emailReg.test(email.value.trim())) {
-            errorMsg.textContent = "Please enter a valid email ending with .com";
+        if (!email.value.trim()) {
+            errorMsg.textContent = "Please enter your email!";
             return;
         }
         if (!phone.value.trim()) {
-            errorMsg.textContent = "Please enter your phone number";
+            errorMsg.textContent = "Please enter your phone number!";
             return;
         }
 
@@ -178,65 +185,127 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const newBooking = {
             id: Date.now().toString(),
+            tourId: selectedTour.id,
             tourName: selectedTour.name,
-            city: selectedTour.city,
             date: travelDate.value,
             travelers: count,
             total: selectedTour.price * count,
             fullName: fullName.value.trim(),
             email: email.value.trim(),
             phone: phone.value.trim(),
-            notes: document.getElementById('notes').value,
             status: 'Confirmed'
         };
 
         try {
-            const res = await fetch(BOOKINGS_API, {
+            const res = await fetch('http://localhost:3000/bookings', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newBooking)
             });
 
             if (res.ok) {
+                errorMsg.textContent = "";
                 bookingForm.reset();
+                fillUserData();
                 updateSummary();
-                await fetchBookings();
                 successModal.show();
+                loadBookings();
+            } else {
+                errorMsg.textContent = "Failed to save booking. Please try again.";
             }
-        } catch (error) {
-            console.error('Error saving booking:', error);
-            errorMsg.style.color = "#ff6b6b";
-            errorMsg.textContent = "Connection error, make sure server is running!";
+        } catch (err) {
+            errorMsg.textContent = "Connection error! Make sure server is running.";
         }
     });
 
-    function renderBookings(list) {
-        bookingsList.innerHTML = '';
+   
+    let itemToEditId = null;
+    const editTourSelect = document.getElementById('editTourSelect');
+    const editTravelDate = document.getElementById('editTravelDate');
+    const editTravelers = document.getElementById('editTravelers');
+    const editPhone = document.getElementById('editPhone');
+    const editErrorMsg = document.getElementById('editErrorMsg');
+    const confirmUpdateBtn = document.getElementById('confirmUpdateBtn');
+    const editModal = new bootstrap.Modal(document.getElementById('editModal'));
 
-        if (!list || list.length === 0) {
-            bookingsList.innerHTML = '<tr><td colspan="8" class="text-muted py-3">No bookings found.</td></tr>';
+    if (editTravelDate) editTravelDate.min = todayDate;
+
+    window.askEditBooking = async function (id) {
+        itemToEditId = id;
+        if (editErrorMsg) editErrorMsg.textContent = "";
+
+        try {
+            const res = await fetch(`http://localhost:3000/bookings/${id}`);
+            const booking = await res.json();
+
+            const matchingTour = toursData.find(t => t.name === booking.tourName || String(t.id) === String(booking.tourId));
+            if (matchingTour && editTourSelect) editTourSelect.value = matchingTour.id;
+
+            if (editTravelDate) editTravelDate.value = booking.date;
+            if (editTravelers) editTravelers.value = booking.travelers;
+            if (editPhone) editPhone.value = booking.phone;
+
+            editModal.show();
+        } catch (err) {
+            console.error("Error fetching booking details:", err);
+        }
+    };
+
+    confirmUpdateBtn.addEventListener('click', async () => {
+        if (!itemToEditId) return;
+        if (editErrorMsg) editErrorMsg.textContent = "";
+
+        if (!editTourSelect.value) {
+            editErrorMsg.textContent = "Please select a tour!";
+            return;
+        }
+        if (!editTravelDate.value) {
+            editErrorMsg.textContent = "Please select a travel date!";
+            return;
+        }
+        if (!editTravelers.value || editTravelers.value < 1) {
+            editErrorMsg.textContent = "Please enter a valid travelers count!";
+            return;
+        }
+        if (!editPhone.value.trim()) {
+            editErrorMsg.textContent = "Please enter your phone number!";
             return;
         }
 
-        list.forEach(item => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td class="fw-bold">${item.tourName}</td>
-                <td>${item.date}</td>
-                <td>${item.travelers}</td>
-                <td class="fw-bold text-success">$${item.total}</td>
-                <td>${item.fullName}</td>
-                <td>${item.email}</td>
-                <td><span class="badge bg-success">${item.status}</span></td>
-                <td>
-                    <button class="btn btn-danger btn-sm rounded-pill px-3" onclick="window.askDeleteBooking('${item.id}')">
-                        Delete
-                    </button>
-                </td>
-            `;
-            bookingsList.appendChild(tr);
-        });
-    }
+        const selectedTour = toursData.find(t => String(t.id) === String(editTourSelect.value));
+        const count = Number(editTravelers.value) || 1;
+
+        const updatedData = {
+            tourId: selectedTour.id,
+            tourName: selectedTour.name,
+            date: editTravelDate.value,
+            travelers: count,
+            total: selectedTour.price * count,
+            phone: editPhone.value.trim()
+        };
+
+        try {
+            const res = await fetch(`http://localhost:3000/bookings/${itemToEditId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedData)
+            });
+
+            if (res.ok) {
+                editModal.hide();
+                loadBookings();
+            } else {
+                if (editErrorMsg) editErrorMsg.textContent = "Failed to update booking.";
+            }
+        } catch (err) {
+            if (editErrorMsg) editErrorMsg.textContent = "Connection error while updating.";
+        }
+    });
+
+   
+    let itemToDeleteId = null;
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
 
     window.askDeleteBooking = function (id) {
         itemToDeleteId = id;
@@ -247,44 +316,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!itemToDeleteId) return;
 
         try {
-            const res = await fetch(`${BOOKINGS_API}/${itemToDeleteId}`, {
+            const res = await fetch(`http://localhost:3000/bookings/${itemToDeleteId}`, {
                 method: 'DELETE'
             });
+
             if (res.ok) {
                 deleteModal.hide();
-                await fetchBookings();
+                loadBookings();
             }
-        } catch (error) {
-            console.error('Error deleting booking:', error);
+        } catch (err) {
+            console.error("Error deleting:", err);
         } finally {
             itemToDeleteId = null;
         }
     });
 
-    function applyFilters() {
-        const selectedCity = filterCity.value;
-        const maxPrice = parseFloat(filterPrice.value);
-
-        const filtered = bookingsData.filter(item => {
-            const matchesCity = selectedCity === 'all' || item.city === selectedCity;
-            const matchesPrice = isNaN(maxPrice) || item.total <= maxPrice;
-            return matchesCity && matchesPrice;
-        });
-
-        renderBookings(filtered);
-    }
-
-    tourSelect.addEventListener('change', updateSummary);
-    travelersInput.addEventListener('input', updateSummary);
-    filterCity.addEventListener('change', applyFilters);
-    filterPrice.addEventListener('input', applyFilters);
-
-    resetFiltersBtn.addEventListener('click', () => {
-        filterCity.value = 'all';
-        filterPrice.value = '';
-        renderBookings(bookingsData);
-    });
-
-    fetchTours();
-    fetchBookings();
+    
+    loadTours();
+    loadBookings();
 });
