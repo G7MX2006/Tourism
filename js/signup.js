@@ -15,14 +15,8 @@ errorMsg.style.textAlign = "center";
 signupForm.appendChild(errorMsg);
 
 const API_URL = "http://localhost:3000/users";
-const nameRegex = /^[A-Za-z\u0600-\u06FF\s]{3,35}$/;
+const nameRegex = /^[A-Za-z\u0600-\u06FF]{3,}(?:\s+[A-Za-z\u0600-\u06FF]{3,})+$/;
 const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
-const savedEmail = localStorage.getItem("rememberedEmail");
-if (savedEmail) {
-    emailInput.value = savedEmail;
-    if (rememberMe) rememberMe.checked = true;
-}
 
 async function Register(userData) {
     try {
@@ -47,7 +41,7 @@ async function Register(userData) {
             localStorage.removeItem("rememberedEmail");
         }
 
-       
+
         window.location.href = window.location.origin + "/index.html";
 
     } catch (err) {
